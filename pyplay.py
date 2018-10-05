@@ -7,17 +7,28 @@ pygame.init()
 #########
 
 class TextObjects(object):
-    def __init__(self, text):
-        self.color = (255, 255, 255)
-        self.text = font.render(text, True, self.color)
 
-    def fontColor(self, color):
+    def __init__(self):
+        self.color = (255, 255, 255)
+        self.position_x = 30
+        self.position_y = 30
+        self.font = pygame.font.SysFont("consolas", 36)
+
+    def setColor(self, color):
         if color == 'white':
             self.color = (255, 255, 255)
         elif color == 'blue':
             self.color = (0, 0, 255)
         elif color == 'red':
             self.color = (255, 0, 0)
+
+    def fontSize(self, size):
+        self.font = pygame.font.SysFont("consolas", size)
+
+    def writeText(self, text):
+        text = self.font.render(text, True, self.color)
+        self.position_y += text.get_height() + 2
+        screen.blit(text, (self.position_x, self.position_y))
 
 
 #########
@@ -36,12 +47,9 @@ clock = pygame.time.Clock()
 
 font = pygame.font.SysFont("consolas", 36)
 
-text1 = font.render("INC100000345653  This is Great man  ", True, (255, 255, 255))
-text2 = font.render("INC100000345653  This is AWESOME man  ", True, (255, 255, 255))
 
-counter = 0
 clicked = False
-text = text1
+
 while not done:
         for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -65,9 +73,6 @@ while not done:
                     if event.key == pygame.K_DOWN:
                         pass
 
-        text_pos_x = 30
-        text_pos_y = 30
-
         pygame.draw.rect(screen, (255, 255, 0), pygame.Rect(30, 30, 60, 60))
 
         #Draws a black screen
@@ -76,13 +81,9 @@ while not done:
         #Draw select bar
 
         #prints text 10 times and calculates position
+        t = TextObjects()
         for i in range(0,10):
-            screen.blit(text, (text_pos_x, text_pos_y))
-            text_pos_y+=(text.get_height() + 2)
-
-        counter+=1
-        counter_text = font.render(str(counter), True, (255, 255, 255))
-        screen.blit(counter_text, (text_pos_x, text_pos_y))
+            t.writeText('INC100000345653  This is Great man')
 
 
         pygame.display.flip()
