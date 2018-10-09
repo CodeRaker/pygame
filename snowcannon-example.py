@@ -8,8 +8,8 @@ from snowcannon import SnowCannon
 ##
 pygame.init()
 rgb = RGBColors()
-screen_x = 1920
-screen_y = 1080
+screen_x = 400
+screen_y = 300
 screen = pygame.display.set_mode((screen_x, screen_y))
 pygame.display.set_caption("SnowFall")
 
@@ -19,6 +19,7 @@ pygame.display.set_caption("SnowFall")
 snowCannon = SnowCannon(screen_x, screen_y, screen, rgb.white)
 snowCannon.snowFlakes_small = 25
 snowCannon.snowFlakes_large = 10
+snowCannon.groundfall = True
 snowCannon.spawn()
 
 clock = pygame.time.Clock()
